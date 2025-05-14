@@ -4,39 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zone01 Kisumu Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style/style.css">
 </head>
 <body>
-    <div id="login-page" class="login-page">
-        <div class="login-page-header">
-            <div class="login">
-                <i class="symbol"></i>
-                <h1 class="login-form-title">Zone01 Kisumu Profile</h1>
-                <p class="login-message">Sign in to view your progress</p>
+    <div class="login-container">
+        <div class="text-center mb-8">
+            <div class="flex justify-center mb-4">
+                <i class="fas fa-code logo wave-animation"></i>
             </div>
-
-            <form id="login-form">
-                <div class="input">
-                    <label for="username">Username or Email</label>
-                    <input type="text" id="username" name="username" placeholder="Enter username or email">
+            <h1>Zone01 Kisumu</h1>
+            <p>Sign in to track your coding journey</p>
+        </div>
+        
+        <form id="loginForm">
+            <div class="relative">
+                <label for="username"></label>Username or Email</label>
+                <div class="relative">
+                    <div class="user-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <input type="text" id="username" name="username" 
+                           class="input-field" 
+                           placeholder="bigman or student@zone01kisumu.ke">
                 </div>
-
-                <div class="input">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password">
-                </div>
-                <div class="checkbox">
-                    <input type="checkbox" id="show-password" name="show-password">
-                    <label for="show-password">Show Password</label>
-                </div>
-                <button type="submit" class="submit-button">
-                    <i>Log In</i>
-                </button>
-                <div id="login-error" class="login-error"></div>
-            </form>
-
-            <div class="no-account">
-                <p class="text-gray-600">Don't have an account? <a href="https://learn.zone01kisumu.ke">Sign up here</a></p>
             </div>
+            
+            <div class="relative">
+                <label for="password" class="password-label">Password</label>
+                <div class="relative">
+                    <div class="lock-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <input type="password" id="password" name="password" 
+                           class="input-field" 
+                           placeholder="••••••••">
+                    <div class="password-toggle" id="togglePassword">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <input id="remember-me" name="remember-me" type="checkbox">
+                    <label for="remember-me">Remember me</label>
+                </div>
+                <div class="text-sm">
+                    <a href="#" class="text-indigo-600">Forgot password?</a>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-login">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+            
+            <div id="errorMessage" class="hidden text-center"></div>
+        </form>
+        
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">
+                New to Zone01? 
+                <a href="https://learn.zone01kisumu.ke" class="text-indigo-600">
+                    Join our community
+                </a>
+            </p>
         </div>
     </div>
 </body>
