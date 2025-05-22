@@ -32,5 +32,15 @@ function initialize() {
             togglePassword.querySelector('i').classList.toggle('fa-eye-slash');
         });
     }
+
+    showLogin();
 }
 
+// UI functions
+function showLogin() {
+    if (loginContainer) loginContainer.classList.remove('hidden');
+    if (loginError) {
+        loginError.textContent = '';
+        loginError.classList.add('hidden');
+    }
+}
