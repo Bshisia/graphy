@@ -82,6 +82,14 @@ async function handleLogin(e) {
     }
 }
 
+// Error handling
+function showError(message) {
+    if (loginError) {
+        loginError.textContent = message;
+        loginError.classList.remove('hidden');
+    }
+}
+
 // UI functions
 function showLogin() {
     if (loginContainer) loginContainer.classList.remove('hidden');
