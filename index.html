@@ -9,18 +9,18 @@
 </head>
 <body>
     <div class="login-container">
-        <div class="text-center mb-8">
-            <div class="flex justify-center mb-4">
+        <div class="login-header">
+            <div class="logo-container">
                 <i class="fas fa-code logo wave-animation"></i>
             </div>
             <h1>Zone01 Kisumu</h1>
             <p>Sign in to track your coding journey</p>
         </div>
         
-        <form id="loginForm">
-            <div class="relative">
-                <label for="username"></label>Username or Email</label>
-                <div class="relative">
+        <form id="loginForm" class="login-form">
+            <div class="form-group">
+                <label for="username">Username or Email</label>
+                <div class="input-icon-group">
                     <div class="user-icon">
                         <i class="fas fa-user"></i>
                     </div>
@@ -30,9 +30,9 @@
                 </div>
             </div>
             
-            <div class="relative">
+            <div class="form-group">
                 <label for="password" class="password-label">Password</label>
-                <div class="relative">
+                <div class="input-icon-group">
                     <div class="lock-icon">
                         <i class="fas fa-lock"></i>
                     </div>
@@ -45,13 +45,13 @@
                 </div>
             </div>
             
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
+            <div class="form-options">
+                <div class="remember-me">
                     <input id="remember-me" name="remember-me" type="checkbox">
                     <label for="remember-me">Remember me</label>
                 </div>
-                <div class="text-sm">
-                    <a href="#" class="text-indigo-600">Forgot password?</a>
+                <div class="forgot-password">
+                    <a href="#">Forgot password?</a>
                 </div>
             </div>
             
@@ -59,20 +59,35 @@
                 <i class="fas fa-sign-in-alt"></i> Sign In
             </button>
             
-            <div id="errorMessage" class="hidden text-center"></div>
+            <div id="errorMessage" class="hidden error-message"></div>
+            <div id="successMessage"></div>
         </form>
         
-        <div class="mt-6 text-center">
-            <p class="text-sm text-gray-600">
+        <div class="register-link">
+            <p>
                 New to Zone01? 
-                <a href="https://learn.zone01kisumu.ke" class="text-indigo-600">
+                <a href="https://learn.zone01kisumu.ke">
                     Join our community
                 </a>
             </p>
         </div>
     </div>
-    <div id="profile-container">
-        this is the profile container
+    <div id="profile-page" class="hidden profile-page">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-container">
+                <div class="header-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>School Profile Dashboard</h1>
+                </div>
+                <div class="header-user">
+                    <span id="user-name"></span>
+                    <button id="logout-btn" class="btn-logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
     </div>
     <script src="/static/script/main.js"></script>
 </body>
