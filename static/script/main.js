@@ -35,6 +35,12 @@ function initialize() {
         });
     }
 
+    // Add logout event listener
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', handleLogout);
+    }
+
     showLogin();
 }
 
@@ -86,6 +92,24 @@ async function handleLogin(e) {
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i> Sign In';
     }
+}
+
+// Logout function
+function handleLogout() {
+    localStorage.removeItem('authToken');
+    authToken = null;
+    // Hide profile page and show login
+    const profilePage = document.getElementById('profile-page');
+    if (profilePage) profilePage.classList.add('hidden');
+    if (loginContainer) loginContainer.classList.remove('hidden');
+    // Optionally clear fields and messages
+    if (usernameInput) usernameInput.value = '';
+    if (passwordInput) passwordInput.value = '';
+    if (successMessage) {
+        successMessage.textContent = '';
+        successMessage.classList.remove('show');
+    }
+    showLogin();
 }
 
 // Error handling
