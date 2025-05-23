@@ -13,6 +13,8 @@ const loginError = document.getElementById('errorMessage');
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
 const togglePassword = document.getElementById('togglePassword');
+const profileContainer = document.getElementById('dashboard');
+const successMessage = document.getElementById('successMessage');
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', initialize);
@@ -69,8 +71,12 @@ async function handleLogin(e) {
         localStorage.setItem('authToken', token);
         authToken = token;
         
-        // Redirect to dashboard or home page after successful login
-        window.location.href = '/dashboard.html';
+        if (loginContainer) loginContainer.classList.add('hidden');
+        const profilePage = document.getElementById('profile-page');
+        if (profilePage) profilePage.classList.remove('hidden');
+        
+        successMessage.textContent = 'Login successful!';
+        successMessage.classList.add('show');
         
     } catch (error) {
         showError('Login failed: ' + error.message);
