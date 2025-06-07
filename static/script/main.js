@@ -1,25 +1,33 @@
 // Constants
-const API_DOMAIN = window.location.hostname;
 const AUTH_ENDPOINT = `https://learn.zone01kisumu.ke/api/auth/signin`;
-const GRAPHQL_ENDPOINT = `https://learn.zone01kisumu.ke/api/graphql-engine/v1/graphql`;
 
 // State management
 let authToken = localStorage.getItem('authToken');
 
 // DOM elements
-const loginContainer = document.getElementById('login-container');
+const loginContainer = document.querySelector('.login-container');
+const profilePage = document.getElementById('profile-page');
 const loginForm = document.getElementById('loginForm');
 const loginError = document.getElementById('errorMessage');
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
 const togglePassword = document.getElementById('togglePassword');
-const profileContainer = document.getElementById('dashboard');
 const successMessage = document.getElementById('successMessage');
 
-// Event Listeners
-document.addEventListener('DOMContentLoaded', initialize);
+// SPA Navigation
+function navigateTo(page) {
+    // Hide all main sections
+    if (loginContainer) loginContainer.classList.add('hidden');
+    if (profilePage) profilePage.classList.add('hidden');
+
+    // Show the requested section
+    if (page === 'login' && loginContainer) loginContainer.classList.remove('hidden');
+    if (page === 'profile' && profilePage) profilePage.classList.remove('hidden');
+}
 
 // Initialize application
+document.addEventListener('DOMContentLoaded', initialize);
+
 function initialize() {
     // Add event listeners after DOM is loaded
     if (loginForm) {
@@ -41,7 +49,12 @@ function initialize() {
         logoutBtn.addEventListener('click', handleLogout);
     }
 
-    showLogin();
+    // Show correct page based on auth state
+    if (authToken) {
+        navigateTo('profile');
+    } else {
+        navigateTo('login');
+    }
 }
 
 // Authentication functions
@@ -76,13 +89,15 @@ async function handleLogin(e) {
         const token = await response.json();
         localStorage.setItem('authToken', token);
         authToken = token;
-        
-        if (loginContainer) loginContainer.classList.add('hidden');
-        const profilePage = document.getElementById('profile-page');
-        if (profilePage) profilePage.classList.remove('hidden');
-        
+
+        // Optionally set username in profile
+        const userNameSpan = document.getElementById('user-name');
+        if (userNameSpan) userNameSpan.textContent = username;
+
         successMessage.textContent = 'Login successful!';
         successMessage.classList.add('show');
+
+        navigateTo('profile');
         
     } catch (error) {
         showError('Login failed: ' + error.message);
@@ -98,10 +113,6 @@ async function handleLogin(e) {
 function handleLogout() {
     localStorage.removeItem('authToken');
     authToken = null;
-    // Hide profile page and show login
-    const profilePage = document.getElementById('profile-page');
-    if (profilePage) profilePage.classList.add('hidden');
-    if (loginContainer) loginContainer.classList.remove('hidden');
     // Optionally clear fields and messages
     if (usernameInput) usernameInput.value = '';
     if (passwordInput) passwordInput.value = '';
@@ -109,7 +120,11 @@ function handleLogout() {
         successMessage.textContent = '';
         successMessage.classList.remove('show');
     }
-    showLogin();
+    if (loginError) {
+        loginError.textContent = '';
+        loginError.classList.add('hidden');
+    }
+    navigateTo('login');
 }
 
 // Error handling
@@ -117,14 +132,5 @@ function showError(message) {
     if (loginError) {
         loginError.textContent = message;
         loginError.classList.remove('hidden');
-    }
-}
-
-// UI functions
-function showLogin() {
-    if (loginContainer) loginContainer.classList.remove('hidden');
-    if (loginError) {
-        loginError.textContent = '';
-        loginError.classList.add('hidden');
     }
 }
