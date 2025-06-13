@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zone01 Kisumu Profile</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/static/style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+
+<body class="bg-gray-100 font-sans">
     <div class="login-container">
         <div class="login-header">
             <div class="logo-container">
@@ -16,7 +19,7 @@
             <h1>Zone01 Kisumu</h1>
             <p>Sign in to track your coding journey</p>
         </div>
-        
+
         <form id="loginForm" class="login-form">
             <div class="form-group">
                 <label for="username">Username or Email</label>
@@ -24,27 +27,24 @@
                     <div class="user-icon">
                         <i class="fas fa-user"></i>
                     </div>
-                    <input type="text" id="username" name="username" 
-                           class="input-field" 
-                           placeholder="bigman or student@zone01kisumu.ke">
+                    <input type="text" id="username" name="username" class="input-field"
+                        placeholder="bigman or student@zone01kisumu.ke">
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label for="password" class="password-label">Password</label>
                 <div class="input-icon-group">
                     <div class="lock-icon">
                         <i class="fas fa-lock"></i>
                     </div>
-                    <input type="password" id="password" name="password" 
-                           class="input-field" 
-                           placeholder="••••••••">
+                    <input type="password" id="password" name="password" class="input-field" placeholder="••••••••">
                     <div class="password-toggle" id="togglePassword">
                         <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-options">
                 <div class="remember-me">
                     <input id="remember-me" name="remember-me" type="checkbox">
@@ -54,41 +54,194 @@
                     <a href="#">Forgot password?</a>
                 </div>
             </div>
-            
+
             <button type="submit" class="btn-login">
                 <i class="fas fa-sign-in-alt"></i> Sign In
             </button>
-            
+
             <div id="errorMessage" class="hidden error-message"></div>
             <div id="successMessage"></div>
         </form>
-        
+
         <div class="register-link">
             <p>
-                New to Zone01? 
+                New to Zone01?
                 <a href="https://learn.zone01kisumu.ke">
                     Join our community
                 </a>
             </p>
         </div>
     </div>
-    <div id="profile-page" class="hidden profile-page">
+
+    <div id="profile-page" class="hidden">
         <!-- Header -->
-        <header class="dashboard-header">
-            <div class="header-container">
-                <div class="header-title">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h1>School Profile Dashboard</h1>
+        <header class="gradient-bg text-white shadow-lg">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-graduation-cap text-2xl"></i>
+                    <h1 class="text-xl font-bold">School Profile Dashboard</h1>
                 </div>
-                <div class="header-user">
-                    <span id="user-name"></span>
-                    <button id="logout-btn" class="btn-logout">
-                        <i class="fas fa-sign-out-alt"></i> Logout
+                <div class="flex items-center space-x-4">
+                    <span id="user-name" class="font-medium"></span>
+                    <button id="logout-btn"
+                        class="bg-white text-purple-600 px-3 py-1 rounded-md text-sm font-medium hover:bg-gray-100 transition duration-300">
+                        <i class="fas fa-sign-out-alt mr-1"></i> Logout
                     </button>
                 </div>
             </div>
         </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <!-- User Info Section -->
+            <section class="mb-12 slide-up">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="md:flex">
+                        <div class="md:w-1/4 bg-purple-100 flex items-center justify-center p-6">
+                            <div class="w-32 h-32 rounded-full bg-white flex items-center justify-center shadow-inner">
+                                <i class="fas fa-user-graduate text-5xl text-purple-500"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 md:w-3/4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-800" id="profile-name">Loading...</h2>
+                                    <p class="text-gray-600" id="profile-email">Loading...</p>
+                                </div>
+                                <div class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold">
+                                    <i class="fas fa-star mr-1"></i> <span id="profile-level">Loading...</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="bg-purple-100 p-2 rounded-full mr-3">
+                                            <i class="fas fa-bolt text-purple-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-500">Total XP</p>
+                                            <p class="font-bold text-gray-800" id="total-xp">0</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="bg-green-100 p-2 rounded-full mr-3">
+                                            <i class="fas fa-check-circle text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-500">Projects Passed</p>
+                                            <p class="font-bold text-gray-800" id="projects-passed">0</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                            <i class="fas fa-chart-line text-blue-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-500">Audit Ratio</p>
+                                            <p class="font-bold text-gray-800" id="audit-ratio">0.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="mb-12 fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-chart-pie mr-2 text-purple-600"></i> Your Statistics
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- XP Progress Graph -->
+                    <div class="bg-white p-6 rounded-xl shadow-md graph-container">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-semibold text-gray-800">XP Progress Over Time</h3>
+                            <button id="refresh-xp" class="text-purple-600 hover:text-purple-800">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <div class="h-64">
+                            <svg id="xp-graph" width="100%" height="100%" viewBox="0 0 500 250" class="mt-4">
+                                <line x1="50" y1="200" x2="450" y2="200" stroke="#ddd" stroke-width="2" />
+                                <line x1="50" y1="200" x2="50" y2="50" stroke="#ddd" stroke-width="2" />
+                                <text x="250" y="230" text-anchor="middle" font-size="12" fill="#666">Time</text>
+                                <text x="30" y="125" text-anchor="middle" font-size="12" fill="#666"
+                                    transform="rotate(-90, 30, 125)">XP</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Projects Pie Chart -->
+                    <div class="bg-white p-6 rounded-xl shadow-md graph-container">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-semibold text-gray-800">Projects Completion</h3>
+                            <button id="refresh-projects" class="text-purple-600 hover:text-purple-800">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <div class="h-64 flex items-center justify-center">
+                            <svg id="projects-chart" width="200" height="200" viewBox="0 0 200 200" class="pie-chart">
+                                <circle cx="100" cy="100" r="80" fill="none" stroke="#eee" stroke-width="2" />
+                                <text x="100" y="100" text-anchor="middle" font-size="12" fill="#666">Loading
+                                    data...</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section class="mb-12 fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-history mr-2 text-purple-600"></i> Recent Activity
+                </h2>
+
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Date</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Type</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Project</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        XP</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="activity-table" class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td colspan="5" class="px-6 py-4 text-center text-gray-500">Loading activities...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
+
     <script src="/static/script/main.js"></script>
 </body>
+
 </html>
