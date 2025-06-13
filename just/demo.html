@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Demo - GRAPHQL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+        body {
+            padding: 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .demo-title {
+            text-align: center;
+            color: #f59e0b;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+        }
+        .demo-section {
+            margin-bottom: 3rem;
+        }
+        .demo-section h2 {
+            color: #f59e0b;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 class="demo-title">GraphQL Profile - Chart Demonstrations</h1>
+        
+        <div class="demo-section">
+            <h2>1. Audit Ratio Pie Chart</h2>
+            <div class="chart-container" id="demo-audit-chart"></div>
+        </div>
+
+        <div class="demo-section">
+            <h2>1b. Audit Chart (No Data)</h2>
+            <div class="chart-container" id="demo-audit-chart-empty"></div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>2. Project Success Rate Bar Chart</h2>
+            <div class="chart-container" id="demo-project-chart"></div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>3. Skills Radar Chart</h2>
+            <div class="chart-container" id="demo-skills-chart"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { generateAuditRatioPieChart, generateProjectSuccessChart, generateSkillsRadarChart } from './scripts/graphs.js';
+        
+        // Demo data
+        const demoAuditRatio = 0.75; // 75% success rate
+        const demoTotalUp = 15; // Successful audits
+        const demoTotalDown = 5; // Failed audits
+        
+        const demoProjectStats = {
+            go: { done: 8, total: 12 },
+            javascript: { done: 15, total: 18 },
+            rust: { done: 5, total: 8 }
+        };
+        
+        const demoSkills = [
+            { type: 'Programming', amount: 85 },
+            { type: 'Problem Solving', amount: 78 },
+            { type: 'Algorithms', amount: 72 },
+            { type: 'Data Structures', amount: 68 },
+            { type: 'System Design', amount: 65 },
+            { type: 'Testing', amount: 60 }
+        ];
+        
+        // Generate demo charts
+        document.addEventListener('DOMContentLoaded', () => {
+            const auditChart = document.getElementById('demo-audit-chart');
+            const auditChartEmpty = document.getElementById('demo-audit-chart-empty');
+            const projectChart = document.getElementById('demo-project-chart');
+            const skillsChart = document.getElementById('demo-skills-chart');
+
+            if (auditChart) {
+                auditChart.innerHTML = generateAuditRatioPieChart(demoAuditRatio, demoTotalUp, demoTotalDown);
+            }
+
+            if (auditChartEmpty) {
+                auditChartEmpty.innerHTML = generateAuditRatioPieChart(0, 0, 0);
+            }
+            
+            if (projectChart) {
+                projectChart.innerHTML = generateProjectSuccessChart(demoProjectStats);
+            }
+            
+            if (skillsChart) {
+                skillsChart.innerHTML = generateSkillsRadarChart(demoSkills);
+            }
+        });
+    </script>
+</body>
+</html>
