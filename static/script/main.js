@@ -328,9 +328,13 @@ function updateActivityTable(transactions) {
 
     // Filter XP transactions and take most recent 5
     const recentXP = transactions
-        .filter(tx => tx.type === 'xp')
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .slice(0, 5);
+    .filter(tx => tx.type === 'xp')
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 5)
+    .map(tx => ({
+        ...tx,
+        amountKB: (tx.amount / 1000).toFixed(1)
+    }));
 
     recentXP.forEach(tx => {
         const row = document.createElement('tr');
@@ -345,7 +349,7 @@ function updateActivityTable(transactions) {
                 ${tx.object?.name || 'N/A'}
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-                ${tx.amount.toLocaleString()}
+                ${(tx.amountKB)} kB
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
                 <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
